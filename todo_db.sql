@@ -1,0 +1,18 @@
+CREATE DATABASE todo_db;
+USE todo_db;
+
+CREATE TABLE Users (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Email VARCHAR(50) NOT NULL UNIQUE,
+    PasswordHash VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Tasks (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Title VARCHAR(100) NOT NULL,
+    Priority ENUM('Baja', 'Media', 'Alta') DEFAULT 'Media',
+    Completed BOOLEAN DEFAULT FALSE,
+    UserId INT,
+    FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE
+);
